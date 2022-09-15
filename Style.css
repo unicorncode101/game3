@@ -1,0 +1,24 @@
+.grid-container-game{
+
+    display:grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 14px;
+    background-color: white;
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    margin: 10px;
+
+}
+.grid-container-game >div{
+    
+    text-align: center;
+    background-color: blue;
+    color:white; 
+
+    padding: 20px 0 ;
+    font-size: medium;
+    border-radius:14px;
+    vertical-align: center;
+
+}
