@@ -1,24 +1,86 @@
+body{
+
+	background-color:black;
+}
+.chatWin{
+	position:fixed;
+	right:20px;
+	width:400px;
+	height:650px;
+	border-style: solid;
+	border-color: black;
+	border-radius: 5px;
+	overflow-y:scroll;
+	font-size:20px;
+	
+}
+
+.QuestionDiv{
+	font-size:30px;
+	color:white;
+	height:auto;
+	top:10%;
+	text-align:center;
+	background-color:black;
+	width:375px;
+	height:650px;
+	border-style: solid;
+	border-color: black;
+	border-radius: 5px;
+}
+
+
 .grid-container-game{
+	color:white;
+
+    display:grid;
+    grid-template-columns:25% 25% 25% 25% 25%;
+	left:23%;
+	top:5%;
+    grid-gap: 5px;
+    background-color: black;
+    position: fixed;
+    width: 650px;
+    height: 650px;
+    margin: 8px;
+
+}
+.grid-container-game >div{
+	color:white;
+    text-align: center;
+    background-color: blue;
+    color:white; 
+	width:auto;
+	height:auto;
+    padding: 10px 0 ;
+    border-radius:14px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+	font-size:30px;
+}
+
+.grid-container-main{
 
     display:grid;
     grid-template-columns: auto auto auto auto auto;
     grid-gap: 14px;
     background-color: white;
-    position: fixed;
-    width: 500px;
-    height: 500px;
+
+    width: auto;
+
+
     margin: 10px;
+  
 
 }
-.grid-container-game >div{
+.grid-container-main >div{
     
-    text-align: center;
-    background-color: blue;
-    color:white; 
 
-    padding: 20px 0 ;
-    font-size: medium;
-    border-radius:14px;
-    vertical-align: center;
 
+}
+.specialFont{
+	color:green;
+	font-family: 'Abril Fatface', 
+	cursive; font-family: 'DynaPuff', cursive; 
+	font-size:40px; 
+	
 }
