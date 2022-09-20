@@ -1,4 +1,4 @@
-
+// if  correct answer  then  users sticker appears over  said question 
 var currentQuestion; 
 var nextQuestion = true; 
 var correctUser =['-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-',];
@@ -34,17 +34,11 @@ cat1 = a;
 	stuff = stuff.sort(sortByProperty('value'))
 	
 	var i =0;
-	var y=1*4 ;
-	
-	
-	
 	while(i < stuff.length){
-	
-	
-	questions[first[i]] = stuff[i].question;
-	correctAnswer[first[i]] = stuff[i].answer;
-	questionValue[first[i]] = stuff[i].value; 
-	i++;
+			questions[first[i]] = stuff[i].question;
+			correctAnswer[first[i]] = stuff[i].answer;
+			questionValue[first[i]] = stuff[i].value; 
+			i++;
 	
 	}
 	//console.log(a);
@@ -57,14 +51,13 @@ cat1 = a;
 	var stuff=JSON.parse(a);
 		stuff = stuff.sort(sortByProperty('value'))
 	var i =0;
-	var y=1*4 ;
-	while(i < stuff.length){
-	
-	
-	questions[second[i]] = stuff[i].question;
-	correctAnswer[second[i]] = stuff[i].answer;
-	questionValue[second[i]] = stuff[i].value; 
-	i++;
+		
+		while(i < stuff.length){
+			
+			questions[second[i]] = stuff[i].question;
+			correctAnswer[second[i]] = stuff[i].answer;
+			questionValue[second[i]] = stuff[i].value; 
+			i++;
 	
 	}
 
@@ -73,19 +66,16 @@ cat1 = a;
 
 
 
- getQuestions("THE MUSICAL DR. IS IN",1).then((a) => {
+getQuestions("THE MUSICAL DR. IS IN",1).then((a) => {
 cat1 = a;
 	var stuff=JSON.parse(a);
-		stuff = stuff.sort(sortByProperty('value'))
+	stuff = stuff.sort(sortByProperty('value'))
 	var i =0;
-	var y=1*4 ;
 	while(i < stuff.length){
-	
-	
-	questions[third[i]] = stuff[i].question;
-	correctAnswer[third[i]] = stuff[i].answer;
-	questionValue[third[i]] = stuff[i].value; 
-	i++;
+			questions[third[i]] = stuff[i].question;
+			correctAnswer[third[i]] = stuff[i].answer;
+			questionValue[third[i]] = stuff[i].value; 
+			i++;
 	
 	}
 });
@@ -95,12 +85,11 @@ cat1 = a;
 	var stuff=JSON.parse(a);
 	stuff = stuff.sort(sortByProperty('value'))
 	var i =0;
-	var y=1*4 ;
 	while(i < stuff.length){
-	questions[fourth[i]] = stuff[i].question;
-	correctAnswer[fourth[i]] = stuff[i].answer;
-	questionValue[fourth[i]] = stuff[i].value; 
-	i++;
+			questions[fourth[i]] = stuff[i].question;
+			correctAnswer[fourth[i]] = stuff[i].answer;
+			questionValue[fourth[i]] = stuff[i].value; 
+			i++;
 	
 	}
 	
@@ -111,13 +100,12 @@ cat1 = a;
 	var stuff=JSON.parse(a);
 	stuff2 = stuff.sort(sortByProperty('value'))
 	var i =0;
-	var y=1*4 ;
 	while(i < stuff.length){
-	questions[fifth[i]] = stuff[i].question;
-	correctAnswer[fifth[i]] = stuff[i].answer;
-	questionValue[fifth[i]] = stuff[i].value; 
-	i++;
-	
+			questions[fifth[i]] = stuff[i].question;
+			correctAnswer[fifth[i]] = stuff[i].answer;
+			questionValue[fifth[i]] = stuff[i].value; 
+			i++;
+			
 	}
 	
 });
@@ -166,10 +154,12 @@ console.log("within check answer");
 
 
 	var divQuestion = document.getElementById("QuestionDiv");
-	if(currentQuestion >0){
+
 	nextQuestion=true; 
 
 	if(correctAnswer[curentQuestion]!=answer){
+		
+		console.log(answer); 
 
 		}
 		else{
@@ -180,12 +170,37 @@ console.log("within check answer");
 			correctUser[curentQuestion]= username
 			}
 		}
-		}
-		else
-		{
-		divQuestion.innerHTML="<h2> Please select a question! </h2>";
 		
-		}
+
+
+}
+function showScoreBoard(){
+	var scoreBoard = document.getElementById('QuestionDiv'); 
+	var fullResults; 
+	/*
+	
+
+	*/
+
+	var tempdata;
+	
+	correctUser.map(function(username, index) {
+
+	
+	if(username.length > 1)
+	{
+    tempdata += "<div>#" +index+ " "  +username  + "</div>";		
+
+	
+	}
+		fullResults = tempdata; 
+});
+	
+	scoreBoard.innerHTML +=  fullResults; 
+
+
+	
+	
 }
 function sortByProperty(property){  
    return function(a,b){  
@@ -221,8 +236,8 @@ async function fetchCat(){
 
 
 }
-function createGame(data,whichdiv ){
-var board = document.getElementById(whichdiv); 
+function createGame(data ){
+var board = document.getElementById('main'); 
 
 var output = '';
 var  final = 26; 
@@ -250,3 +265,7 @@ while(i != final){
 board.innerHTML = outputs1 +output; 
 
 }
+
+
+
+
