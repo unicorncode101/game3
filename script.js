@@ -1,6 +1,9 @@
 // if  correct answer  then  users sticker appears over  said question 
+var listofwinners; 
+
 var currentQuestion; 
 var nextQuestion = true; 
+var correctId =['-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-',];
 var correctUser =['-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-',];
 var whoAsked=['-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-',];
 
@@ -31,16 +34,20 @@ async function getQuestions(cat,id){
 cat1 = a;
 	var stuff=JSON.parse(a);
 	
-	stuff = stuff.sort(sortByProperty('value'))
+
 	
 	var i =0;
 	while(i < stuff.length){
 			questions[first[i]] = stuff[i].question;
 			correctAnswer[first[i]] = stuff[i].answer;
-			questionValue[first[i]] = stuff[i].value; 
+			var tempvalue =String(stuff[i].value).substr(1,stuff[i].value.length); ; 
+			tempvalue = tempvalue.replaceAll(",",""); 
+			questionValue[first[i]] = tempvalue;	
 			i++;
 	
 	}
+	
+	
 	//console.log(a);
 	
 });
@@ -49,14 +56,23 @@ cat1 = a;
  getQuestions("ROCK ME",1).then((a) => {
 cat1 = a;
 	var stuff=JSON.parse(a);
-		stuff = stuff.sort(sortByProperty('value'))
+	
 	var i =0;
 		
-		while(i < stuff.length){
+		
+		
+		while(i < 5){
 			
 			questions[second[i]] = stuff[i].question;
 			correctAnswer[second[i]] = stuff[i].answer;
-			questionValue[second[i]] = stuff[i].value; 
+			
+			var tempvalue =String(stuff[i].value).substr(1,stuff[i].value.length); ; 
+			tempvalue = tempvalue.replaceAll(",",""); 
+			questionValue[second[i]] = tempvalue;
+
+
+
+
 			i++;
 	
 	}
@@ -69,12 +85,16 @@ cat1 = a;
 getQuestions("THE MUSICAL DR. IS IN",1).then((a) => {
 cat1 = a;
 	var stuff=JSON.parse(a);
-	stuff = stuff.sort(sortByProperty('value'))
+
 	var i =0;
-	while(i < stuff.length){
+	while(i < 5){
 			questions[third[i]] = stuff[i].question;
 			correctAnswer[third[i]] = stuff[i].answer;
-			questionValue[third[i]] = stuff[i].value; 
+			var tempvalue =String(stuff[i].value).substr(1,stuff[i].value.length); ; 
+			tempvalue = tempvalue.replaceAll(",",""); 
+			questionValue[third[i]] = tempvalue; 
+			
+	
 			i++;
 	
 	}
@@ -83,14 +103,15 @@ cat1 = a;
  getQuestions("ZOO LAND",1).then((a) => {
 cat1 = a;
 	var stuff=JSON.parse(a);
-	stuff = stuff.sort(sortByProperty('value'))
+
 	var i =0;
 	while(i < stuff.length){
 			questions[fourth[i]] = stuff[i].question;
 			correctAnswer[fourth[i]] = stuff[i].answer;
-			questionValue[fourth[i]] = stuff[i].value; 
+			var tempvalue =String(stuff[i].value).substr(1,stuff[i].value.length); ; 
+			tempvalue = tempvalue.replaceAll(",",""); 
+			questionValue[fourth[i]] = tempvalue;
 			i++;
-	
 	}
 	
 });
@@ -98,12 +119,17 @@ cat1 = a;
  getQuestions("ZOOLOGY",1).then((a) => {
 cat1 = a;
 	var stuff=JSON.parse(a);
-	stuff2 = stuff.sort(sortByProperty('value'))
+
 	var i =0;
-	while(i < stuff.length){
+	while(i < 5){
 			questions[fifth[i]] = stuff[i].question;
 			correctAnswer[fifth[i]] = stuff[i].answer;
-			questionValue[fifth[i]] = stuff[i].value; 
+			var tempvalue =String(stuff[i].value).substr(1,stuff[i].value.length); ; 
+			tempvalue = tempvalue.replaceAll(",",""); 
+			questionValue[fifth[i]] = tempvalue;
+
+			
+			
 			i++;
 			
 	}
@@ -111,9 +137,9 @@ cat1 = a;
 });
 
 
+
 function displayQuestion(id){
 var divQuestion = document.getElementById("QuestionDiv");
-if(nextQuestion !=false ){
 
 
 if(id > 26){
@@ -121,6 +147,7 @@ if(id > 26){
 
 }
 else{
+	
 	divQuestion.innerHTML = "value of question is "+questionValue[id]+"<br>"+questions[id];
 	hideQuestion(id);
 	curentQuestion = id; 
@@ -130,17 +157,16 @@ else{
 
 	}
 
-						}
-	else
-	{
-
-	divQuestion.innerHTML="<h2> Someone must type an answer before going on to the next question. "
-	}
+					 
+	
 							}
+							
+
+							
 function hideQuestion(ids){
 	var divQuestion2 = document.getElementById(ids);
-	divQuestion2.style.color='gray';
-	divQuestion2.innerHTML ='';
+	//divQuestion2.style.color='gray';
+	//divQuestion2.innerHTML ='';
 
 }
 function askQuetion(){
@@ -148,7 +174,7 @@ function askQuetion(){
 	displayQuestion(promptQuestion);
 }
 
-function checkAnswer(answer,username ){
+function checkAnswer(answer,username,userId ){
 console.log("within check answer"); 
 
 
@@ -167,20 +193,24 @@ console.log("within check answer");
 		divQuestion.innerHTML="<h2> Correct Answer</h2> "; 
 		
 		if(curentQuestion >0){
-			correctUser[curentQuestion]= username
+			correctId[curentQuestion] = userId;
+			correctUser[curentQuestion]= username;
+			var tempDiv =document.getElementById(currentQuestion)
+			
+			listofwinners = listofwinners + "," + userId+ ":" + questionValue[curentQuestion];
 			}
 		}
-		
-
-
 }
+
 function showScoreBoard(){
 	var scoreBoard = document.getElementById('QuestionDiv'); 
+	
 	var fullResults; 
 	/*
 	
 
 	*/
+console.log(listofwinners);
 
 	var tempdata;
 	
@@ -189,16 +219,18 @@ function showScoreBoard(){
 	
 	if(username.length > 1)
 	{
-    tempdata += "<div>#" +index+ " "  +username  + "</div>";		
-
+    tempdata += "<div> <img src='" +GetuserImage(correctId[index])+ "' style='width:100px;100px;border-radius: 20px;'></img> <br/>"  +username  + "</div>";		
+	
+	var tempvalue= questionValue[curentQuestion]; 
 	
 	}
-		fullResults = tempdata; 
+		fullResults =  tempdata; 
+		
 });
 	
 	scoreBoard.innerHTML +=  fullResults; 
 
-
+	
 	
 	
 }
@@ -237,13 +269,15 @@ async function fetchCat(){
 
 }
 function createGame(data ){
+
+	
 var board = document.getElementById('main'); 
 
 var output = '';
 var  final = 26; 
 var i=1;
 
-var catArray= ["ZODIAC SYMBOLS","ZOO LAND","ZOOLOGY","THE MUSICAL DR. IS IN", "ROCK ME"]
+var catArray= ["ZODIAC SYMBOLS","ROCK ME","THE MUSICAL DR. IS IN", "ZOOLOGY","ZOO LAND"]
 var catTitle =document.getElementById("main"); 
 var y =0; 
 var outputs1 ='';
@@ -269,3 +303,16 @@ board.innerHTML = outputs1 +output;
 
 
 
+class ScoreTacker{
+	constructor(username, point) {
+    this.name = name;
+    this.points = year;
+  }
+  
+  getscore(){
+	  return this.points;
+	  
+  }
+	
+	
+}
