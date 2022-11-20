@@ -5,45 +5,8 @@
 // chat log below work
 var jsonInfoData =0;
 
- async function getAllJsonInfo(userIDS){
-		var urlForInfo='http://localhost:8081/info/'+userIDS;
-		var jsonId =0;
-	var json = fetch (urlForInfo)
-        .then (blob => blob.json ())
-        .then (data =>
-        {
-            json = JSON.stringify (data, null, 2);
-            jsonId = JSON.parse (json);
-			//console.log(jsonId);
-
-return jsonId; 
-
-			
-        });
 
 
-	
-}
-
- function assignReferees(moderatorUserId)
-    {
-        console.log("actionId=" + '10' + "&userId=" + publicUserId + "&onUserId=" + moderatorUserId + "&broadcastId=" + publicBroadcastId + "&broadcaster=0");
-
-var publicBroadcastId   = (getAllJsonInfo(moderatorUserId)).broadcastId 
-
-
-        fetch("//api.younow.com/php/api/doAdminAction", {
-            "headers": {
-                "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-                "x-requested-by": localStorage.getItem("requestBy")
-            },
-            "body": "actionId=" + '10' + "&userId=" + publicUserId + "&onUserId=" + moderatorUserId + "&broadcastId=" + publicBroadcastId + "&broadcaster=0",
-            "method": "POST",
-            "mode": "cors",
-            "credentials": "include"
-        });
-    }
-	
 	
 var goodies = null; 
 async function getSpecialFans(userid){
@@ -130,19 +93,7 @@ el3.style.visibility = 'hidden';
 
 
 }
-function tradeCards(ToUser,FromUser,cardSent){
 
-
-    targetUrl = 'http://localhost:8080/trade?UserSending='+FromUser+"&UserTo="+ToUser+"&card="+cardSent;
-    var json = fetch (targetUrl)
-        .then (data =>
-        {
-       console.log(data); 
-
-		
-        });
-
-}
 DownloadGifts();
 function displayPopUp(data){
 
@@ -204,18 +155,20 @@ function displayGiftOnly(i,data2){
 
  
 function FetchEvent (userId){
-		pusher = new Pusher ('d5b7447226fc2cd78dbb', {
-        cluster: "younow"
+		pusher = new Pusher ('42a54e2785b3c81ee7b3', {
+        cluster: "mt1"
 		});
 	
 		let channel = pusher.subscribe ("public-channel_" + userId);
   
 		channel.bind('onEnd', function(data){
-
+	displayPopUp2("Now connected");
+				
 		});
 	
 	channel.bind ('onChat', function (data)
     {
+		console.log("on chat"); 
 		
         if (data.message !== "undefined")
     
@@ -238,21 +191,28 @@ function FetchEvent (userId){
 							if(whatsSaid.includes("!q")!=false){
 								
 								var temp = whatsSaid.split(" " );
-								displayQuestion(temp[1]);
+							 displayQuestion(temp[1]);
 								
 							}
 							else if(whatsSaid.includes("!a")!=false){
-										var temp = whatsSaid.split("!a" );
+										var temp = whatsSaid.split("!a " );
+							console.log(temp[1]);
 							
-							checkAnswer(temp[1],username )
+							 checkAnswer(temp[1],username,CommentUserId )
 								
 							}
+								else if(whatsSaid.includes("!score")!=false){
+										
 							
+							showScore();
+							
+								
+							}
 						// 
-							if(ifMod != false) {
+							if(ifMod != false ) {
 			
 			
-							dataout = dataout + "<table><tr><td>"+"<img  style='width:50px;height:50px; border-radius: 20px;align:left;' src='" + userImage+"'/></td><td  class='msg' style='color:red;background-color:white'>" + Math.abs(propslevel) + " " +data.message.comments[i].name  +" "+ timeConverter(TimsStamp) +"<br>"  +cleanUp(data.message.comments[i].comment) + 
+							dataout = dataout + "<table><tr><td>"+"<img  style='width:50px;height:50px; border-radius: 20px;align:left;' src='" + userImage+"'/></td><td  class='msg' style='color:red;background-color:white'>" + Math.abs(propslevel) + " " +data.message.comments[i].name  +" "+ timeConverter(TimsStamp) +"<br>"  +data.message.comments[i].comment + 
 							"</td></tr><table>"; 
 							}
 							
@@ -280,28 +240,28 @@ function FetchEvent (userId){
 		
 		// check who  got the gift  and display it in a different list
 		
-		playSound("./sounds/thank_you.wav"); 
+		//playSound("./sounds/thank_you.wav"); 
 		let tempUsername = data.message.stageGifts[0].profileUrlString
 		var giftids = data.message.stageGifts[0].giftId;
 		var onlydata = data.message.stageGifts[0] ;
 		
 		if(data.message.stageGifts[0].extraData.numOfLikes >0){
-			console.log("GOT " +data.message.stageGifts[0].receiverFirstName +" likes " +  data.message.stageGifts[0].extraData.numOfLikes)}
+			displayIt("GOT " +data.message.stageGifts[0].receiverFirstName +" likes " +  data.message.stageGifts[0].extraData.numOfLikes)}
 		else
 		{
 			
 			if(data.message.stageGifts[0].extraData.value >0){
 				
-					console.log(data.message.stageGifts[0].extraData.value)
+					displayIt(data.message.stageGifts[0].extraData.value)
 			}
 			else if(data.message.stageGifts[0].giftId===897){
 				
-				displayPopUp2("New sub");
+				displayIt("New sub");
 				
 			}
 			else if(data.message.stageGifts[0].giftId!=248){
 			
-			console.log(data.message.stageGifts[0]);			
+			displayIt(data.message.stageGifts[0]);			
 			//248
 			}
 			else
@@ -333,8 +293,7 @@ function FetchEvent (userId){
 	
 			dealwithFreeStickers(data);
 		
-		  //  console.log('sticker data', data);
-            //handleNewSticker(data);
+	
         });
 
 		channel.bind('onRaid', function (data)
@@ -342,7 +301,7 @@ function FetchEvent (userId){
 		//console.log("raid : " +  data )
 		
 		});
- channel.bind('onBroadcastPlayData', function (data)
+		channel.bind('onBroadcastPlayData', function (data)
         {
            var  viewers= data.message.viewers ;
 		   var likes = data.message.likes; 
@@ -364,7 +323,7 @@ function FetchEvent (userId){
 			dataout = dataout + "<div class='msg' style='color:red'>"    +data.message.superMessages[0].name +" <b> " + data.message.superMessages[0].comment + "</b><div>"; 
 			displayIt(dataout);
 			
-		//	
+
 		});
 		
 	
@@ -423,38 +382,26 @@ function displayIt(data){
 
 }
 
-
-
-function playAudio() { 
-		var x = document.getElementById("myAudio"); 
-	
-		
-	  var playPromise = x.play();
- 
-  if (playPromise !== undefined) {
-    playPromise.then(_ => {
-	console.log("playing");
-	
-      // Automatic playback started!
-      // Show playing UI.
-      // We can now safely pause video...
-      x.pause();
-    })
-    .catch(error => {
-	console.log(error);
-	
-      // Auto-play was prevented
-      // Show paused UI.
-    });
-  }	
-		
-		
-		
-		
-} 
 function playSound(filename){
 				var audio = new Audio(filename);
         audio.play();
 					
 	
 }
+
+
+   const sendMessage = (text) =>
+    {
+		 'use strict';
+		 
+        fetch("https://api.younow.com/php/api/broadcast/chat", {
+            "headers": {
+                "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                "x-requested-by": localStorage.getItem("requestBy")
+            },
+            "body": "userId=2282276&channelId=2282276"  + "&comment=" + text + "&tsi=qTARYFhKsb&tdi=tV16GrJcrS&lang=en",
+            "method": "POST",
+            "mode": "no-cors",
+            "credentials": "include"
+        });
+    }
