@@ -1,5 +1,5 @@
 // if  correct answer  then  users sticker appears over  said question 
-var listofwinners; 
+var listofwinners ="1:18,1:2,1:3,1:18,2:16,2:2,2:3"; 
 
 var currentQuestion; 
 var nextQuestion = true; 
@@ -142,7 +142,7 @@ function displayQuestion(id){
 var divQuestion = document.getElementById("QuestionDiv");
 
 
-if(id > 26){
+if(id > 25){
 	alert("no such question");
 
 }
@@ -166,7 +166,7 @@ else{
 function hideQuestion(ids){
 	var divQuestion2 = document.getElementById(ids);
 	//divQuestion2.style.color='gray';
-	//divQuestion2.innerHTML ='';
+	divQuestion2.innerHTML ='';
 
 }
 function askQuetion(){
@@ -299,7 +299,71 @@ while(i != final){
 board.innerHTML = outputs1 +output; 
 
 }
+function showScore(){
+	
+	
+	var  data = listofwinners.split(","); 
+	
+	
+	
+	var output ="";
+	
+	//console.log(data.length);
+	var i =0;
+	 var winners=['-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-',];
+	 
+	 var scoreWinner  =['-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-',];
+	 
+	 
+	while( i < data.length){
+		
+	var tempdata = data[i].split(":");
+	//output += "<b>" + tempdata[0] + "</b>" + questionValue[tempdata[1]] + "<br>";
+	var whereAt = winners.indexOf(tempdata[0]); 
+	var emptySpace  = winners.indexOf("-");
 
+
+		if(whereAt >-1 ){
+			
+			
+			scoreWinner[whereAt] += (  parseInt(questionValue[tempdata[1]]));
+//console.log( parseInt(questionValue[tempdata[1]])); 
+			}
+		else{
+			
+		
+	
+		winners[emptySpace] = tempdata[0]; 
+		scoreWinner[emptySpace] = parseInt( parseInt(questionValue[tempdata[1]]));
+		//console.log( parseInt(questionValue[tempdata[1]])); 
+		
+	
+		}
+		i++; 	
+	}
+	
+	var scorelist = "<table> <th>Username </th><th>Score</th>"; 
+	
+	// console.log(scoreWinner);
+	for (i =0 ;i< scoreWinner.length;i++)
+	{
+		
+		
+		if(winners[i].includes("-") !=true){
+			
+		scorelist =  scorelist+"<tr><td>" + winners[i] +" </td><td>"  + scoreWinner[i] + "</td></tr>"			
+		}
+		else{
+			
+		}
+		
+	}
+	var test123= document.getElementById("popup"); 
+	test123.style.display="block";
+	test123.innerHTML = scorelist + "</table>";
+	
+	
+}
 
 
 
