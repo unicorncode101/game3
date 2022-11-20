@@ -2,10 +2,72 @@ body{
 
 	background-color:black;
 }
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: black green;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 20px;
+}
+
+*::-webkit-scrollbar-track {
+  background: black;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 20px;
+  border: 10px solid  green;
+}
+body{
+ scrollbar-color: white black;   /* scroll thumb and track */ 
+ background-color:black;
+
+}
+table{
+	background:white; 
+	color:black; 
+	border-radius:28px;
+	
+	
+}
+th{
+	color:red;
+	
+	padding:10px;
+	text-transform:uppercase;
+	
+	
+}
+td{
+	text-align:center;
+	
+	
+}
+
+.popup{
+	
+		position:fixed;
+		padding:20px;
+		width:300px;
+		height:auto;
+		z-index=4;
+		left:55%;
+		font-size:30px;
+		background:white; 
+		color:black; 
+		border-radius:28px;
+		
+	
+}
+
 .chatWin{
 	position:fixed;
 	right:20px;
-	width:400px;
+	width:500px;
 	height:650px;
 	border-style: solid;
 	border-color: black;
@@ -16,26 +78,27 @@ body{
 }
 
 .QuestionDiv{
-	font-size:30px;
+	font-size:50px;
 	color:white;
-	height:auto;
-	top:10%;
+	top:80%;
 	text-align:center;
 	background-color:black;
-	width:375px;
+	width:80%;
 	height:650px;
 	border-style: solid;
 	border-color: black;
-	border-radius: 5px;
+	border-radius: 5px
+	
 }
 
 
 .grid-container-game{
 	color:white;
 
+
     display:grid;
     grid-template-columns:25% 25% 25% 25% 25%;
-	left:23%;
+	left:10%;
 	top:5%;
     grid-gap: 5px;
     background-color: black;
@@ -64,10 +127,7 @@ body{
     grid-template-columns: auto auto auto auto auto;
     grid-gap: 14px;
     background-color: white;
-
     width: auto;
-
-
     margin: 10px;
   
 
@@ -78,9 +138,9 @@ body{
 
 }
 .specialFont{
-	color:green;
+	color:white;
 	font-family: 'Abril Fatface', 
 	cursive; font-family: 'DynaPuff', cursive; 
-	font-size:40px; 
+	font-size:50px; 
 	
 }
