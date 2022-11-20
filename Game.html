@@ -18,13 +18,21 @@
 
 <body>
 
-
+<div id="popup" class="popup" style="display:none";>  hidden</div>
+ 
 <center><h2>Jeopardy</h2></center>
-<div id="chatWin" class="chatWin" style="background-color:black;">
+<div id="question" class="QuestionDiv"> 
+
+
+</div> 
+
+
+<div id="chatWin" class="chatWin" style="width:500px;background-color:black;color:white;right:10px;top:10px; font-size:40px;">
 </div>
 	<div class="QuestionDiv" id="QuestionDiv">
 	Question  here. 
 	<button onclick="FetchEvent(2282276)"> Close</button>
+		<button onclick="showScore();"> test</button>
 </div>
 <div class="grid-container-game" style="float:center" id="main">
 <script>
@@ -32,16 +40,13 @@
 
 </script>
     <script src="./script.js"> </script>
-    
-    <script>
-
-	</script>
-	
 
 
-<div style="background-color:transparent">	
-<button onclick="createGame(questionValue,'main');">Load questions </button>
+
+<div style="background-color:transparent;top:10px;right:20px">	
+<button onclick="createGame(questionValue);">Load questions </button>
 </div>
+
 
 </body>
 </html>
