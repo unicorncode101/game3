@@ -44,22 +44,27 @@ th{
 }
 td{
 	text-align:center;
+
+
+	border-color:black;
+	border-size:2px;
 	
-	
+	padding:20px;
 }
 
 .popup{
 	
 		position:fixed;
 		padding:20px;
-		width:300px;
-		height:auto;
+		width:500px;
+		height:50%;
 		z-index=4;
-		left:55%;
-		font-size:30px;
+		left:70%;
 		background:white; 
 		color:black; 
 		border-radius:28px;
+		font-size:39px;
+	
 		
 	
 }
@@ -74,7 +79,9 @@ td{
 	border-radius: 5px;
 	overflow-y:scroll;
 	font-size:20px;
-	
+	color:white;
+	display:none; 
+
 }
 
 .QuestionDiv{
