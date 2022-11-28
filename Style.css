@@ -3,6 +3,11 @@ body{
 	background-color:black;
 }
 /* Works on Firefox */
+.upcase{
+	text-transform:uppercase;
+	font-size:30px;
+	
+}
 * {
   scrollbar-width: thin;
   scrollbar-color: black green;
@@ -30,40 +35,55 @@ body{
 table{
 	background:white; 
 	color:black; 
-	border-radius:28px;
+	border-radius:4px;
 	
+	width:50%;
+	height:50%;
+
+	
+}
+tr{
+	
+	width:300px;
+	padding:20px;
 	
 }
 th{
-	color:red;
-	
-	padding:10px;
-	text-transform:uppercase;
-	
+	padding-right:40px;
+	padding-left:40px;
+	border-radius:25px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #04AA6D;
+	color: white;
+
+	font-family: 'Abril Fatface', 
+	cursive; font-family: 'DynaPuff', cursive; 
 	
 }
 td{
+	padding-top:20px;	
+	padding-right:40px;
+	padding-left:40px;
+	border-radius:25px;
 	text-align:center;
-
-
+	border: 1px solid #ddd;
+	padding: 8px;
 	border-color:black;
-	border-size:2px;
-	
-	padding:20px;
 }
 
 .popup{
-	
-		position:fixed;
-		padding:20px;
-		width:500px;
-		height:50%;
-		z-index=4;
-		left:70%;
-		background:white; 
-		color:black; 
-		border-radius:28px;
-		font-size:39px;
+	position:fixed;
+	padding:20px;
+	width:500px;
+	height:50%;
+	z-index=4;
+	left:70%;
+	background:white; 
+	color:black; 
+	border-radius:28px;
+	font-size:39px;
 	
 		
 	
